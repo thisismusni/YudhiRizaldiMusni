@@ -1,9 +1,9 @@
-package Tugas2_172055;
+package PBO_I_172055;
 import java.util.Scanner;
 
-public class biodata 
+public class Tugas_2_172055 
 {
-     public static void main(String[] args) 
+    public static void main(String[] args) 
     {
         String name, stb, umur;
         
@@ -19,6 +19,7 @@ public class biodata
         umur = baca.nextLine();
         
         System.out.println("");
-        System.out.println("Nim " + stb + " Dengan Nama " + name + " Berumur " + umur + " Tahun");        
+        System.out.println("Nim " + stb + " Dengan Nama " + name + " Berumur " 
+                + umur + " Tahun");   
     }
 }
