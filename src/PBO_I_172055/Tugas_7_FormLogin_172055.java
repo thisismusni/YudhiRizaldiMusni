@@ -1,66 +1,97 @@
 package PBO_I_172055;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 public class Tugas_7_FormLogin_172055 extends javax.swing.JFrame {
 
-    public Tugas_7_FormLogin_172055() {
+    String use, pas, user, pass, nma;
+    int X, Y;
+    
+    public Tugas_7_FormLogin_172055() 
+    {
         initComponents();
         setVisible(true);
-        this.setLocationRelativeTo(null);
-        setResizable(false);
+        setTitle("Login");
+        fungsiLayar();
     }
     
     void fungsiLogin()
     {
         try
         {
-            String user = txtUser.getText();
-            String pass = txtPass.getText();
-
-            String use = "yudhi", pas= "172055";
+            user = txtUser.getText();
+            pass = txtPass.getText();
+            
+            Statement stat = (Statement) koneksiDB.DCCkoneksi().createStatement();
+            ResultSet res = stat.executeQuery("SELECT nama, usernamee, passwordd FROM "
+                    + "admin_172055 WHERE usernamee='"+user+"' AND passwordd='"+pass+"'");
+            
+            while (res.next())
+            {
+                use = (res.getString("usernamee"));
+                pas = (res.getString("passwordd"));
+                nma = (res.getString("nama"));
+            }
 
             if (!"".equals(user) && !"".equals(pass))
             {
-                    if(user.equals(use) && pass.equals(pas))
-                    {
-                        new Tugas_7_FormUtama_172055();
-                        dispose();
-                    }
-                    else if (!user.equals(use) && pass.equals(pas))
-                    {
-                        JOptionPane.showMessageDialog(null, "Username anda salah");
-                        txtUser.setText("");
-                        txtUser.requestFocus();
-                    }
-                    else if (user.equals(use) && !pass.equals(pas))
-                    {
-                        JOptionPane.showMessageDialog(null, "Password anda salah");
-                        txtPass.setText("");
-                        txtPass.requestFocus();
-                    }
-                    else
-                    {
-                        JOptionPane.showMessageDialog(null, "Username dan Password anda salah");
-                        txtUser.setText("");
-                        txtPass.setText("");
-                        txtUser.requestFocus();
-                    }
+                if(user.equals(use) && pass.equals(pas))
+                {
+                    new Tugas_7_FormUtama_172055(nma);
+                    koneksiDB.nmaAdmin = nma;
+                    setEnabled(false);
+                    
                 }
+                else if (!user.equals(use) && pass.equals(pas))
+                {
+                    JOptionPane.showMessageDialog(null, "Username anda salah");
+                    txtUser.setText("");
+                    txtUser.requestFocus();
+                }
+                else if (user.equals(use) && !pass.equals(pas))
+                {
+                    JOptionPane.showMessageDialog(null, "Password anda salah");
+                    txtPass.setText("");
+                    txtPass.requestFocus();
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Username dan Password anda salah");
+                    txtUser.setText("");
+                    txtPass.setText("");
+                    txtUser.requestFocus();
+                }
+            }
             else
+            {
                 JOptionPane.showMessageDialog(null, "masukkan username dan password anda");
+                txtUser.requestFocus();
+            }   
         }
         catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, e.toString());
         }
     }
+    
+    void fungsiLayar()
+    {
+        Dimension layar = Toolkit.getDefaultToolkit().getScreenSize();
+        X = layar.width / 2 - this.getSize().width / 2;
+        Y = 100;
+        this.setLocation(X, Y);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         cbShowpass = new javax.swing.JCheckBox();
         txtPass = new javax.swing.JPasswordField();
         lblUser = new javax.swing.JLabel();
@@ -68,6 +99,9 @@ public class Tugas_7_FormLogin_172055 extends javax.swing.JFrame {
         txtUser = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
+        btnRegistrasi = new javax.swing.JLabel();
+
+        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,6 +155,14 @@ public class Tugas_7_FormLogin_172055 extends javax.swing.JFrame {
             }
         });
 
+        btnRegistrasi.setText("Belum punya akun..?");
+        btnRegistrasi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistrasi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegistrasiMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,11 +179,17 @@ public class Tugas_7_FormLogin_172055 extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(cbShowpass)
                         .addComponent(txtUser)
+                        .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnLogin)
-                            .addGap(18, 18, 18)
-                            .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(20, 20, 20)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addComponent(btnRegistrasi))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnLogin)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -161,7 +209,9 @@ public class Tugas_7_FormLogin_172055 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin)
                     .addComponent(btnExit))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRegistrasi)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -205,36 +255,16 @@ public class Tugas_7_FormLogin_172055 extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         fungsiLogin();
-        //            Statement stm=konek.DCCkoneksi().createStatement();
-        //            String sql = "SELECT * from tbl_admin where username='"+txtUser.getText()+"'and "
-        //            + "password='"+txtPass.getText()+"'";
-        //            ResultSet rs = stm.executeQuery(sql);
-        //
-        //            if(rs.next())
-        //            {
-            //                if(txtUser.getText().equals(rs.getString("username")) &&
-                //                    txtPass.getText().equals(rs.getString("password")))
-            //                {
-                //                    JOptionPane.showMessageDialog(null, "Login Success");
-                //                    new formRegistrasiAdmin();
-                //                    dispose();
-                //                }
-            //            }
-        //            else
-        //            {
-            //                JOptionPane.showMessageDialog(null, "username atau password salah");
-            //            }
-
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        int exit = JOptionPane.showConfirmDialog
-        (null,"Yakin ingin keluar ?", "Tutup Aplikasi", JOptionPane.YES_NO_OPTION);
-        if (exit == JOptionPane.YES_OPTION)
-        {
-            System.exit(0);
-        }
+        System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
+
+    private void btnRegistrasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrasiMouseClicked
+        new Tugas_8_FormRAdmin_172055();
+        dispose();
+    }//GEN-LAST:event_btnRegistrasiMouseClicked
 
     /**
      * @param args the command line arguments
@@ -274,7 +304,9 @@ public class Tugas_7_FormLogin_172055 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnLogin;
+    private javax.swing.JLabel btnRegistrasi;
     private javax.swing.JCheckBox cbShowpass;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblPass;
     private javax.swing.JLabel lblUser;
     private javax.swing.JPasswordField txtPass;
