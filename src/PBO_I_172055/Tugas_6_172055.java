@@ -60,7 +60,6 @@ public class Tugas_6_172055 extends javax.swing.JFrame {
     
     void fungsikalender()
     {
-//        Date datenow = new Date();
         Calendar kalender = Calendar.getInstance();
         kalender.setTime(datenow);
 
@@ -114,12 +113,14 @@ public class Tugas_6_172055 extends javax.swing.JFrame {
     {
         long umur=0;
         
-        
         try {
-            int tglLahir = (int) cmbTgl.getSelectedItem();
-            int blnLahir = (int) cmbBln.getSelectedItem();
-            int thnLahir = (int) cmbThn.getSelectedItem();
+            String tglLahir1 = (String) cmbTgl.getSelectedItem();
+            String blnLahir2 = (String) cmbBln.getSelectedItem();
+            String thnLahir3 = (String) cmbThn.getSelectedItem();
             
+            int tglLahir = Integer.valueOf(tglLahir1);
+            int blnLahir = Integer.valueOf(blnLahir2);
+            int thnLahir = Integer.valueOf(thnLahir3);
             
             Calendar kalender = Calendar.getInstance();
             kalender.setTime(datenow);
@@ -164,7 +165,6 @@ public class Tugas_6_172055 extends javax.swing.JFrame {
         {
 //            JOptionPane.showMessageDialog(null, "apanya "+e.toString());
         }
-//        JOptionPane.showMessageDialog(null, tglLahir);
     }
     
     void fungsiLayar()
@@ -767,35 +767,35 @@ public class Tugas_6_172055 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmbThnActionPerformed
 
-    public static void main(String args[]) {
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Tugas_6_172055.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Tugas_6_172055.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Tugas_6_172055.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Tugas_6_172055.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Tugas_6_172055().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Tugas_6_172055.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Tugas_6_172055.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Tugas_6_172055.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Tugas_6_172055.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Tugas_6_172055().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEdit;
